@@ -1,0 +1,17 @@
+:host {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.board {
+    display: block;
+    margin: auto;
+
+    td {
+        border: 1px solid black;
+        width: 4em;
+        height: 4em;
+    }
+}
