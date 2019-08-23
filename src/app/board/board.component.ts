@@ -32,13 +32,15 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   play(col: number) {
+    if(this.boardService.play() == 0)
+      return;
+
     const row = this.findDestination(col);
     console.log(row, col);
     if(row === undefined){
       return;
     }
     this.board[row][col] = this.currentPlayer;
-    this.boardService.play();
     this.boardService.next();
   }
 

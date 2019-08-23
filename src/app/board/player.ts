@@ -12,6 +12,9 @@ export class Player {
     }
 
     play() {
+        if(this.pieces == 0)
+            return 0;
+
         return --this.pieces;
     }
 }
