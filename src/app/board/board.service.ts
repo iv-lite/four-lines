@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Player } from './player';
 
-const P1_COLOR = 'red';
-const P2_COLOR = 'yellow';
+const P1_COLOR = 'yellow';
+const P2_COLOR = 'red';
 
 @Injectable()
 export class BoardService {
@@ -18,7 +18,7 @@ export class BoardService {
   reset() {
     this.turns = 0;
     this.players = [P1_COLOR, P2_COLOR].map(color => new Player({ color }));
-    
+
     if(this._turn == undefined)
       this._turn = new BehaviorSubject<Player>(this.players[this.turns]);
     else
