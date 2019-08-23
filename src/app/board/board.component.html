@@ -1,7 +1,24 @@
 <table class="board">
+    <thead>
+        <tr>
+            <th colspan="7">
+                <i class="piece" [ngClass]="currentPlayer?.color"></i>
+            </th>
+        </tr>
+    </thead>
     <tr *ngFor="let boardCol of board; index as row;">
         <td *ngFor="let player of boardCol; index as col;">
             <i class="piece" [ngClass]="player?.color" (click)="play(col)"></i>
         </td>
     </tr>
+    <tfoot>
+        <tr>
+            <td colspan="7">
+                <h4>Player {{ currentPlayer.id + 1 }}</h4>
+                <p *ngIf="winner != undefined">
+                    Player {{ winner.id }} wins !
+                </p>
+            </td>
+        </tr>
+    </tfoot>
 </table>
