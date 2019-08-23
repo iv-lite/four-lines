@@ -10,4 +10,8 @@ export class Player {
         this.color = props.color;
         this.pieces = props.pieces || NBR_PIECES;
     }
+
+    play() {
+        return --this.pieces;
+    }
 }
