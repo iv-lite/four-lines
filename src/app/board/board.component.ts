@@ -45,7 +45,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     if(!this.check(row, col))
       this.boardService.next();
     else
-      console.log('Winner: ', this.currentPlayer);
+      this.winner = this.currentPlayer;
   }
 
   check(row: number, col: number) {
