@@ -4,7 +4,7 @@ import { Route, RouterModule } from '@angular/router';
 import { BoardComponent } from './board.component';
 
 const ROUTES: Route[] = [
-  { path: '', component: BoardComponent}
+  { path: '', component: BoardComponent }
 ];
 
 @NgModule({
