@@ -34,10 +34,14 @@ export class BoardComponent implements OnInit, OnDestroy {
   play(col: number) {
     const row = this.findDestination(col);
     console.log(row, col);
+    if(row === undefined){
+      return;
+    }
+    this.board[row][col] = this.currentPlayer;
   }
 
   findDestination(col: number) {
-    for(let i = this.board.length - 1; i >= 0; i++) {
+    for(let i = this.board.length - 1; i >= 0; i--) {
       if(this.board[i][col] === undefined) {
         return i;
       }
