@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Player } from './player';
+import { BoardService } from './board.service';
+import { Subscription } from 'rxjs';
 
 const NBR_ROWS = 6;
 const NBR_COLS = 7;
@@ -9,15 +11,27 @@ const NBR_COLS = 7;
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
+  private $subscriptions: Subscription[];
+  currentPlayer: Player;
   board: Player[][];
 
-  constructor() {
+  constructor(
+    private boardService: BoardService
+  ) {
+    this.$subscriptions = [];
     this.board = [...new Array(NBR_ROWS)].map( () => [...new Array(NBR_COLS)]);
+    
+    const sub = this.boardService.turn.subscribe(player => this.currentPlayer = player);
+
+    this.$subscriptions.push(sub);
   }
 
   ngOnInit() {
     console.log(this.board);
   }
 
+  ngOnDestroy() {
+    this.$subscriptions.forEach(sub => sub.unsubscribe());
+  }
 }
