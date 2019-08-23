@@ -12,13 +12,14 @@ export class BoardService {
   private _turn: BehaviorSubject<Player>;
 
   constructor() {
+
+    this.players = [P1_COLOR, P2_COLOR].map(( color, index) => new Player({ id: index, color }));
     this.reset();
   }
 
   reset() {
     this.turns = 0;
-    this.players = [P1_COLOR, P2_COLOR].map(color => new Player({ color }));
-
+    this.players.forEach(player => player.reset());
     if(this._turn == undefined)
       this._turn = new BehaviorSubject<Player>(this.players[this.turns]);
     else
@@ -34,6 +35,6 @@ export class BoardService {
   }
 
   next() {
-    this._turn.next(this.players[++this.turns % 2]);
+    this._turn.next(this.players[this.turns++ % 2]);
   }
 }

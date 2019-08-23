@@ -19,4 +19,8 @@ export class Player {
 
         return --this.pieces;
     }
+
+    reset() {
+        this.pieces = NBR_PIECES;
+    }
 }
