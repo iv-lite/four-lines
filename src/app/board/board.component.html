@@ -1,1 +1,7 @@
-<p>board works!</p>
+<table>
+    <tr *ngFor="let col of board">
+        <td *ngFor="let player of col">
+            <i class="piece" [ngClass]="player?.color"></i>
+        </td>
+    </tr>
+</table>
