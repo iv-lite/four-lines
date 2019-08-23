@@ -1,7 +1,7 @@
 <table class="board">
-    <tr *ngFor="let col of board">
-        <td *ngFor="let player of col">
-            <i class="piece" [ngClass]="player?.color"></i>
+    <tr *ngFor="let boardCol of board; index as row;">
+        <td *ngFor="let player of boardCol; index as col;">
+            <i class="piece" [ngClass]="player?.color" (click)="play(i,j)"></i>
         </td>
     </tr>
 </table>
