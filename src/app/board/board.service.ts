@@ -18,7 +18,11 @@ export class BoardService {
   reset() {
     this.turns = 0;
     this.players = [P1_COLOR, P2_COLOR].map(color => new Player({ color }));
-    this._turn = new BehaviorSubject<Player>(this.players[this.turns]);
+    
+    if(this._turn == undefined)
+      this._turn = new BehaviorSubject<Player>(this.players[this.turns]);
+    else
+      this.next();
   }
 
   get turn() {

@@ -21,7 +21,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     private boardService: BoardService
   ) {
     this.$subscriptions = [];
-    this.board = [...new Array(NBR_ROWS)].map( () => [...new Array(NBR_COLS)]);
+    this.reset();
     
     const sub = this.boardService.turn.subscribe(player => this.currentPlayer = player);
 
@@ -82,6 +82,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
 
     return undefined;
+  }
+
+  reset() {
+    this.board = [...new Array(NBR_ROWS)].map( () => [...new Array(NBR_COLS)]);
+    this.boardService.reset();
   }
 
   ngOnDestroy() {
