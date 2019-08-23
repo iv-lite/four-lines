@@ -29,15 +29,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    document.addEventListener('mousemove', e => {
-      const target = document.getElementById('current-player-piece');
-      const x = e.pageX - target.getBoundingClientRect().left;
-      const pos = target.offsetLeft;
-      const diff = Math.abs(x - pos);
-
-      if(Math.abs(diff) <= document.querySelector('.board').clientWidth)
-        target.style.transform = `translateX(${diff}px)`;
-    });
   }
 
   play(col: number) {
