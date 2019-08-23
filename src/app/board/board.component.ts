@@ -14,6 +14,7 @@ const NBR_COLS = 7;
 export class BoardComponent implements OnInit, OnDestroy {
   private $subscriptions: Subscription[];
   currentPlayer: Player;
+  winner: Player;
   board: Player[][];
 
   constructor(
@@ -32,7 +33,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   play(col: number) {
-    if(this.boardService.play() == 0)
+    if(this.boardService.play() == 0 || this.winner !== undefined)
       return;
 
     const row = this.findDestination(col);
@@ -41,7 +42,39 @@ export class BoardComponent implements OnInit, OnDestroy {
       return;
     }
     this.board[row][col] = this.currentPlayer;
-    this.boardService.next();
+    if(!this.check(row, col))
+      this.boardService.next();
+    else
+      console.log('Winner: ', this.currentPlayer);
+  }
+
+  check(row: number, col: number) {
+    const results = [
+      // diagonals
+      this.line(row, col, -1, -1) + 1 + this.line(row, col, 1, 1),
+      this.line(row, col, -1, 1) + 1 + this.line(row, col, 1, -1),
+      // horizontal and vertical
+      this.line(row, col, 0, 1) + 1 + this.line(row, col, 0, -1),
+      this.line(row, col, -1, 0) + 1 + this.line(row, col, 1, 0),
+    ];
+    console.log(results);
+    return results.find(res => res >= 4);
+  }
+
+  line(row: number, col: number, dirRow: number, dirCol: number) {
+    const i = row + dirRow;
+    const j = col + dirCol;
+
+    if(i < 0 || i >= NBR_ROWS)
+      return 0;
+
+    if(j < 0 || j >= NBR_COLS)
+      return 0;
+
+    if(this.board[i][j] == undefined || this.board[i][j].id !== this.currentPlayer.id )
+      return 0;
+
+    return 1 + this.line(i, j, dirRow, dirCol);
   }
 
   findDestination(col: number) {
