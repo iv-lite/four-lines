@@ -38,6 +38,8 @@ export class BoardComponent implements OnInit, OnDestroy {
       return;
     }
     this.board[row][col] = this.currentPlayer;
+    this.boardService.play();
+    this.boardService.next();
   }
 
   findDestination(col: number) {
