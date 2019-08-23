@@ -28,7 +28,22 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log(this.board);
+    console.log(this.currentPlayer);
+  }
+
+  play(col: number) {
+    const row = this.findDestination(col);
+    console.log(row, col);
+  }
+
+  findDestination(col: number) {
+    for(let i = this.board.length - 1; i >= 0; i++) {
+      if(this.board[i][col] === undefined) {
+        return i;
+      }
+    }
+
+    return undefined;
   }
 
   ngOnDestroy() {
