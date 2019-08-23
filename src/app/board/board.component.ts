@@ -29,7 +29,15 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log(this.currentPlayer);
+    document.addEventListener('mousemove', e => {
+      const target = document.getElementById('current-player-piece');
+      const x = e.pageX - target.getBoundingClientRect().left;
+      const pos = target.offsetLeft;
+      const diff = Math.abs(x - pos);
+
+      if(Math.abs(diff) <= document.querySelector('.board').clientWidth)
+        target.style.transform = `translateX(${diff}px)`;
+    });
   }
 
   play(col: number) {
@@ -37,7 +45,6 @@ export class BoardComponent implements OnInit, OnDestroy {
       return;
 
     const row = this.findDestination(col);
-    console.log(row, col);
     if(row === undefined){
       return;
     }
@@ -57,7 +64,6 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.line(row, col, 0, 1) + 1 + this.line(row, col, 0, -1),
       this.line(row, col, -1, 0) + 1 + this.line(row, col, 1, 0),
     ];
-    console.log(results);
     return results.find(res => res >= 4);
   }
 
