@@ -11,9 +11,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static('dist'));
+app.use(express.static('dist/four-lines'));
 app.get('*', function(req, res) {
-  res.sendfile('./dist/index.html')
+  res.sendfile('./dist/four-lines/index.html')
 });
 
 const PORT = process.env.PORT;
