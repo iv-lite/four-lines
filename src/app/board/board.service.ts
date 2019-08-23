@@ -12,6 +12,10 @@ export class BoardService {
   private _turn: BehaviorSubject<Player>;
 
   constructor() {
+    this.reset();
+  }
+
+  reset() {
     this.turns = 0;
     this.players = [P1_COLOR, P2_COLOR].map(color => new Player({ color }));
     this._turn = new BehaviorSubject<Player>(this.players[this.turns]);
