@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Player } from './player';
 
-const P1_COLOR = 'yellow';
-const P2_COLOR = 'red';
+const P1_COLOR = 'red';
+const P2_COLOR = 'yellow';
 
 @Injectable()
 export class BoardService {

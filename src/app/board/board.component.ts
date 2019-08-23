@@ -87,6 +87,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   reset() {
     this.board = [...new Array(NBR_ROWS)].map( () => [...new Array(NBR_COLS)]);
     this.boardService.reset();
+    this.winner = undefined;
   }
 
   ngOnDestroy() {
