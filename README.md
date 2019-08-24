@@ -7,6 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## build and start
 ```npm run build```
+
 ```npm start```
 
 ## serve the application for dev
