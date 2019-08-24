@@ -120,6 +120,13 @@ export class BoardComponent implements OnInit, OnDestroy {
     return 1 + this.line(i, j, dirRow, dirCol);
   }
 
+  /**
+   * Toggle all pieces in the col highlight class.
+   *
+   * @param   col
+   *
+   * @return  void
+   */
   toggleHighlight(col) {
     if(this.winner != undefined)
       return;
@@ -131,6 +138,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Resets highlight state of the given col.
+   */
   resetHighlight() {
     const tbody = document.getElementById('board').querySelector('tbody');
     for (let i = 0; i < this.board.length; i++) {
@@ -141,6 +151,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Find the lowest in height undefined piece location in the given col.
+   * 
+   * @param col 
+   */
   findDestination(col: number) {
     for(let i = this.board.length - 1; i >= 0; i--) {
       if(this.board[i][col] === undefined) {
@@ -151,6 +166,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     return undefined;
   }
 
+  /**
+   * Resets the current game by resetting the board the BoardService as well as setting the winner to undefined.
+   */
   reset() {
     this.board = [...new Array(NBR_ROWS)].map( () => [...new Array(NBR_COLS)]);
     this.boardService.reset();
