@@ -44,7 +44,7 @@
             td {
                 color: azure;
                 
-                h4, p {
+                h4 {
                     text-align: center;
                     font-size: 1.4em;
                 }
@@ -55,12 +55,12 @@
 
 .piece {
     display: block;
-    width: 80%;
-    height: 80%;
+    width: 2.5em;
+    height: 2.5em;
     margin: auto;
     border-radius: 50%;
     background-color: azure;
-    border: 3px solid rgba(128, 128, 128, 0.644);
+    border: 2px solid rgba(128, 128, 128, 0.644);
 }
 
 .piece.red {
@@ -69,4 +69,11 @@
 
 .piece.yellow {
     background-color: yellow;
+}
+
+@media(min-width: 1024px) {
+    .piece {
+        width: 3em;
+        height: 3em;
+    }
 }

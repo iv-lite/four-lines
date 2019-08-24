@@ -16,9 +16,9 @@
         <tr>
             <td colspan="7">
                 <h4 *ngIf="winner == undefined">Player {{ currentPlayer.id + 1 }}</h4>
-                <p *ngIf="winner != undefined">
+                <h4 *ngIf="winner != undefined">
                     Player {{ winner.id + 1}} wins !
-                </p>
+                </h4>
             </td>
         </tr>
     </tfoot>
