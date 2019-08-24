@@ -6,6 +6,9 @@ import { Subscription } from 'rxjs';
 const NBR_ROWS = 6;
 const NBR_COLS = 7;
 
+/**
+ * Board l4-board selector's component.
+ */
 @Component({
   selector: 'l4-board',
   templateUrl: './board.component.html',
@@ -17,6 +20,10 @@ export class BoardComponent implements OnInit, OnDestroy {
   winner: Player;
   board: Player[][];
 
+  /**
+   * Initialize by calling reset once, and
+   * subscribing to turn based system to switch player.
+   */
   constructor(
     private boardService: BoardService
   ) {
@@ -31,7 +38,25 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
+  /**
+   * The play method is meant to be called on a col.
+   * This method does nothing if the game as no play left or if there is 
+   * a winner.
+   * 
+   * Playing to a col means finding the lowest in height row on which no 
+   * player is set and setting the position as the currentPlayer.
+   * 
+   * Then if the game is not wone by the current player after that play 
+   * by calling next on the BoardService.
+   * If the currentPlayer wins the game then it is set as the winner.
+   *
+   * @param   col 
+   *
+   * @return  void
+   */
   play(col: number) {
+    this.resetHighlight();
+
     if(this.boardService.play() == 0 || this.winner !== undefined)
       return;
 
@@ -42,12 +67,18 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.board[row][col] = this.currentPlayer;
     if(!this.check(row, col))
       this.boardService.next();
-    else{
+    else
       this.winner = this.currentPlayer;
-      this.resetHighlight();
-    }
   }
 
+  /**
+   * Check if the last play of currentPlayer as made him win the game.
+   *
+   * @param row  row position
+   * @param col  col position
+   *
+   * @return  if the game is one with last play.
+   */
   check(row: number, col: number) {
     const results = [
       // diagonals
@@ -60,6 +91,19 @@ export class BoardComponent implements OnInit, OnDestroy {
     return results.find(res => res >= 4);
   }
 
+  /**
+   * Checks a line by incrementing current position by respective dirRow 
+   * and dirCol directions, adding 1 to the total of points of continuing 
+   * line result or zero if current player doesn't have a point on 
+   * current position.
+   *
+   * @param   row
+   * @param   col
+   * @param   dirRow
+   * @param   dirCol
+   *
+   * @return  number of points of the maximum size line in that direction.
+   */
   line(row: number, col: number, dirRow: number, dirCol: number) {
     const i = row + dirRow;
     const j = col + dirCol;

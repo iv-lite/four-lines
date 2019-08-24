@@ -9,8 +9,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let boardCol of board; index as row;">
-            <td *ngFor="let player of boardCol; index as col;" (mouseenter)="toggleHighlight(col)" (mouseleave)="toggleHighlight(col)">
-                <i class="piece" [ngClass]="player?.color" (click)="play(col)"></i>
+            <td *ngFor="let player of boardCol; index as col;">
+                <i class="piece" [ngClass]="player?.color" (click)="play(col)" (mouseenter)="toggleHighlight(col)" (mouseleave)="resetHighlight(col)"></i>
             </td>
         </tr>
     </tbody>
