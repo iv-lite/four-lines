@@ -44,8 +44,8 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.boardService.next();
     else{
       this.winner = this.currentPlayer;
+      this.resetHighlight();
     }
-    this.resetHighlight();
   }
 
   check(row: number, col: number) {
