@@ -42,8 +42,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.board[row][col] = this.currentPlayer;
     if(!this.check(row, col))
       this.boardService.next();
-    else
+    else{
       this.winner = this.currentPlayer;
+      this.resetHighlight();
+    }
   }
 
   check(row: number, col: number) {
@@ -72,6 +74,27 @@ export class BoardComponent implements OnInit, OnDestroy {
       return 0;
 
     return 1 + this.line(i, j, dirRow, dirCol);
+  }
+
+  toggleHighlight(col) {
+    if(this.winner != undefined)
+      return;
+
+    const tbody = document.getElementById('board').querySelector('tbody');
+    for (let i = 0; i < this.board.length; i++) {
+      const el = tbody.children[i].children[col].querySelector('.piece');
+      el.classList.toggle('highlight');
+    }
+  }
+
+  resetHighlight() {
+    const tbody = document.getElementById('board').querySelector('tbody');
+    for (let i = 0; i < this.board.length; i++) {
+      for (let j = 0; j < this.board[i].length; j++) {
+        const el = tbody.children[i].children[j].querySelector('.piece');
+        el.classList.remove('highlight');
+      }
+    }
   }
 
   findDestination(col: number) {

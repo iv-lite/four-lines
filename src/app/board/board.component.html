@@ -1,4 +1,4 @@
-<table class="board">
+<table class="board" id="board">
     <thead>
         <tr>
             <th colspan="7">
@@ -7,11 +7,13 @@
             </th>
         </tr>
     </thead>
-    <tr *ngFor="let boardCol of board; index as row;">
-        <td *ngFor="let player of boardCol; index as col;">
-            <i class="piece" [ngClass]="player?.color" (click)="play(col)"></i>
-        </td>
-    </tr>
+    <tbody>
+        <tr *ngFor="let boardCol of board; index as row;">
+            <td *ngFor="let player of boardCol; index as col;" (mouseenter)="toggleHighlight(col)" (mouseleave)="toggleHighlight(col)">
+                <i class="piece" [ngClass]="player?.color" (click)="play(col)"></i>
+            </td>
+        </tr>
+    </tbody>
     <tfoot>
         <tr>
             <td colspan="7">
