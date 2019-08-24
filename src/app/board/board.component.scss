@@ -22,6 +22,7 @@
                 .piece {
                     width: 5em;
                     height: 5em;
+                    border: 3px solid rgba(128, 128, 128, 0.644);
                     margin-bottom: 2em;
                 }
             }
@@ -43,10 +44,7 @@
             td {
                 color: azure;
                 
-                h4 {
-                    text-align: center;
-                }
-                p {
+                h4, p {
                     text-align: center;
                     font-size: 1.4em;
                 }
@@ -57,11 +55,12 @@
 
 .piece {
     display: block;
-    width: 85%;
-    height: 85%;
+    width: 80%;
+    height: 80%;
     margin: auto;
     border-radius: 50%;
     background-color: azure;
+    border: 3px solid rgba(128, 128, 128, 0.644);
 }
 
 .piece.red {
