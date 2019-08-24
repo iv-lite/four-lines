@@ -127,14 +127,14 @@ export class BoardComponent implements OnInit, OnDestroy {
    *
    * @return  void
    */
-  toggleHighlight(col) {
+  toggleHighlight(col, force?: boolean) {
     if(this.winner != undefined)
       return;
 
     const tbody = document.getElementById('board').querySelector('tbody');
     for (let i = 0; i < this.board.length; i++) {
       const el = tbody.children[i].children[col].querySelector('.piece');
-      el.classList.toggle('highlight');
+      el.classList.toggle('highlight', force);
     }
   }
 
